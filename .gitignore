@@ -1,0 +1,11 @@
+# Project exclude paths
+/out/
+/.idea/
+/*.iml
+
+# Gradle
+/build/
+/.gradle/
+
+# macOS
+.DS_Store
