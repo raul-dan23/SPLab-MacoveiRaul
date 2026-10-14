@@ -8,6 +8,7 @@ import ro.uvt.info.SPLab_MacoveiRaul.model.AlignRight;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Author;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Book;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Image;
+import ro.uvt.info.SPLab_MacoveiRaul.model.ImageProxy;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Paragraph;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Section;
 
@@ -18,7 +19,8 @@ public class SpLabMacoveiRaulApplication {
 		// SpringApplication.run(SpLabMacoveiRaulApplication.class, args);
 
 		// lab1CompositeDemo();
-		lab2StrategyDemo();
+		// lab2StrategyDemo();
+		lab3ProxyDemo();
 	}
 
 	private static void lab1CompositeDemo() {
@@ -71,6 +73,33 @@ public class SpLabMacoveiRaulApplication {
 		System.out.println("Printing with Alignment");
 		System.out.println();
 		cap1.print();
+	}
+
+	private static void lab3ProxyDemo() {
+		long startTime = System.currentTimeMillis();
+		ImageProxy img1 = new ImageProxy("Pamela Anderson");
+		ImageProxy img2 = new ImageProxy("Kim Kardashian");
+		ImageProxy img3 = new ImageProxy("Kirby Griffin");
+		Section playboyS1 = new Section("Front Cover");
+		playboyS1.add(img1);
+		Section playboyS2 = new Section("Summer Girls");
+		playboyS2.add(img2);
+		playboyS2.add(img3);
+		Book playboy = new Book("Playboy");
+		playboy.addContent(playboyS1);
+		playboy.addContent(playboyS2);
+		long endTime = System.currentTimeMillis();
+		System.out.println("Creation of the content took " + (endTime - startTime) + " milliseconds");
+
+		startTime = System.currentTimeMillis();
+		playboyS1.print();
+		endTime = System.currentTimeMillis();
+		System.out.println("Printing of the section 1 took " + (endTime - startTime) + " milliseconds");
+
+		startTime = System.currentTimeMillis();
+		playboyS1.print();
+		endTime = System.currentTimeMillis();
+		System.out.println("Printing again the section 1 took " + (endTime - startTime) + " milliseconds");
 	}
 
 }

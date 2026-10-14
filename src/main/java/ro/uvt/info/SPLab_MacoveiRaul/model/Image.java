@@ -1,10 +1,18 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
+import java.util.concurrent.TimeUnit;
+
 public class Image implements Element {
     private String url;
 
     public Image(String url) {
         this.url = url;
+        // simuleaza o incarcare costisitoare (ex. descarcare de pe disc/retea)
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public String getUrl() {
