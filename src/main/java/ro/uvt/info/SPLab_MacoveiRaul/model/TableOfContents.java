@@ -5,8 +5,7 @@ public class TableOfContents implements Element {
     public TableOfContents() {
     }
 
-    @Override
-    public void print() {
+    public void render() {
         System.out.println("Table of contents");
     }
 
@@ -23,5 +22,10 @@ public class TableOfContents implements Element {
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException("TableOfContents is a leaf and cannot have children");
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
     }
 }

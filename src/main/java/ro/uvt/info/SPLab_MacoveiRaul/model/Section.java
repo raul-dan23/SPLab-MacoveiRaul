@@ -15,16 +15,20 @@ public class Section implements Element {
         return title;
     }
 
-    @Override
-    public void print() {
-        printHeader();
-        for (Element child : children) {
-            child.print();
-        }
+    public void render() {
+        System.out.println(title);
     }
 
-    protected void printHeader() {
-        System.out.println(title);
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
+        acceptChildren(v);
+    }
+
+    protected void acceptChildren(Visitor v) {
+        for (Element child : children) {
+            child.accept(v);
+        }
     }
 
     @Override

@@ -19,8 +19,7 @@ public class Image implements Element {
         return url;
     }
 
-    @Override
-    public void print() {
+    public void render() {
         System.out.println("Image with name:" + url);
     }
 
@@ -38,4 +37,10 @@ public class Image implements Element {
     public Element get(int i) {
         throw new UnsupportedOperationException("Image is a leaf and cannot have children");
     }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
+
 }
