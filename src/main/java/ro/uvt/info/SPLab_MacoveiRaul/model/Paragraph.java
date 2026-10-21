@@ -16,8 +16,7 @@ public class Paragraph implements Element {
         this.alignStrategy = alignStrategy;
     }
 
-    @Override
-    public void print() {
+    public void render() {
         if (alignStrategy != null) {
             alignStrategy.render(this, new Context());
         } else {
@@ -38,5 +37,9 @@ public class Paragraph implements Element {
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException("Paragraph is a leaf and cannot have children");
+    }
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
     }
 }

@@ -19,16 +19,17 @@ public class Book extends Section {
     }
 
     @Override
-    protected void printHeader() {
+    public void render() {
         System.out.println("Book: " + title);
         System.out.println("Authors:");
         for (Author author : authors) {
-            author.print();
+            author.render();
         }
     }
 
     @Override
-    public void print() {
-        super.print();
+    public void accept(Visitor v) {
+        v.visit(this);
+        acceptChildren(v);
     }
 }

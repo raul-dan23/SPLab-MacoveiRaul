@@ -10,6 +10,7 @@ import ro.uvt.info.SPLab_MacoveiRaul.model.Book;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Image;
 import ro.uvt.info.SPLab_MacoveiRaul.model.ImageProxy;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Paragraph;
+import ro.uvt.info.SPLab_MacoveiRaul.model.RenderContentVisitor;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Section;
 
 @SpringBootApplication
@@ -18,8 +19,10 @@ public class SpLabMacoveiRaulApplication {
 	public static void main(String[] args) {
 		// SpringApplication.run(SpLabMacoveiRaulApplication.class, args);
 
-		// lab1CompositeDemo();
-		// lab2StrategyDemo();
+		lab1CompositeDemo();
+		System.out.println();
+		lab2StrategyDemo();
+		System.out.println();
 		lab3ProxyDemo();
 	}
 
@@ -47,7 +50,7 @@ public class SpLabMacoveiRaulApplication {
 
 		cap1111.add(new Image("Image subchapter 1.1.1.1"));
 
-		noapteBuna.print();
+		noapteBuna.accept(new RenderContentVisitor());
 	}
 
 	private static void lab2StrategyDemo() {
@@ -63,7 +66,7 @@ public class SpLabMacoveiRaulApplication {
 
 		System.out.println("Printing without Alignment");
 		System.out.println();
-		cap1.print();
+		cap1.accept(new RenderContentVisitor());
 
 		p1.setAlignStrategy(new AlignCenter());
 		p2.setAlignStrategy(new AlignRight());
@@ -72,7 +75,7 @@ public class SpLabMacoveiRaulApplication {
 		System.out.println();
 		System.out.println("Printing with Alignment");
 		System.out.println();
-		cap1.print();
+		cap1.accept(new RenderContentVisitor());
 	}
 
 	private static void lab3ProxyDemo() {
@@ -92,12 +95,12 @@ public class SpLabMacoveiRaulApplication {
 		System.out.println("Creation of the content took " + (endTime - startTime) + " milliseconds");
 
 		startTime = System.currentTimeMillis();
-		playboyS1.print();
+		playboyS1.accept(new RenderContentVisitor());
 		endTime = System.currentTimeMillis();
 		System.out.println("Printing of the section 1 took " + (endTime - startTime) + " milliseconds");
 
 		startTime = System.currentTimeMillis();
-		playboyS1.print();
+		playboyS1.accept(new RenderContentVisitor());
 		endTime = System.currentTimeMillis();
 		System.out.println("Printing again the section 1 took " + (endTime - startTime) + " milliseconds");
 	}

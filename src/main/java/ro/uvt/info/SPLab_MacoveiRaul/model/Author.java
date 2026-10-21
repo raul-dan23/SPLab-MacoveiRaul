@@ -17,7 +17,7 @@ public class Author {
         return surname;
     }
 
-    public void print() {
+    public void render() {
         System.out.println("Author: " + name + " " + surname);
     }
 }

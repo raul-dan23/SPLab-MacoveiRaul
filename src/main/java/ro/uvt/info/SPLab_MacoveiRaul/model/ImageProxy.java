@@ -5,7 +5,7 @@ public class ImageProxy implements Element {
     private Image realImg = null;
 
     public ImageProxy(String url) {
-        // doar retine url-ul; Image-ul real se creeaza abia la primul print()
+        // doar retine url-ul; Image-ul real se creeaza abia cand e ceruta imaginea propriu-zisa
         this.url = url;
     }
 
@@ -16,9 +16,9 @@ public class ImageProxy implements Element {
         return realImg;
     }
 
-    @Override
-    public void print() {
-        loadImage().print();
+    public void render() {
+        // la randare chiar avem nevoie de imagine: o incarcam (o singura data) si delegam
+        loadImage().render();
     }
 
     @Override
@@ -34,5 +34,10 @@ public class ImageProxy implements Element {
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException("ImageProxy is a leaf and cannot have children");
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
     }
 }

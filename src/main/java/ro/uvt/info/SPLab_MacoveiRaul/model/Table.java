@@ -11,8 +11,7 @@ public class Table implements Element {
         return title;
     }
 
-    @Override
-    public void print() {
+    public void render() {
         System.out.println("Table with title: " + title);
     }
 
@@ -29,5 +28,10 @@ public class Table implements Element {
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException("Table is a leaf and cannot have children");
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
     }
 }
