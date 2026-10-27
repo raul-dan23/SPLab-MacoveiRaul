@@ -7,11 +7,14 @@ import ro.uvt.info.SPLab_MacoveiRaul.model.AlignLeft;
 import ro.uvt.info.SPLab_MacoveiRaul.model.AlignRight;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Author;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Book;
+import ro.uvt.info.SPLab_MacoveiRaul.model.BookStatistics;
+import ro.uvt.info.SPLab_MacoveiRaul.model.GenerateToC;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Image;
 import ro.uvt.info.SPLab_MacoveiRaul.model.ImageProxy;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Paragraph;
 import ro.uvt.info.SPLab_MacoveiRaul.model.RenderContentVisitor;
 import ro.uvt.info.SPLab_MacoveiRaul.model.Section;
+import ro.uvt.info.SPLab_MacoveiRaul.model.Table;
 
 @SpringBootApplication
 public class SpLabMacoveiRaulApplication {
@@ -23,7 +26,11 @@ public class SpLabMacoveiRaulApplication {
 		System.out.println();
 		lab2StrategyDemo();
 		System.out.println();
-		lab3ProxyDemo();
+		lab2ProxyDemo();
+		System.out.println();
+		lab3StatisticsDemo();
+		System.out.println();
+		lab3ToCDemo();
 	}
 
 	private static void lab1CompositeDemo() {
@@ -78,7 +85,7 @@ public class SpLabMacoveiRaulApplication {
 		cap1.accept(new RenderContentVisitor());
 	}
 
-	private static void lab3ProxyDemo() {
+	private static void lab2ProxyDemo() {
 		long startTime = System.currentTimeMillis();
 		ImageProxy img1 = new ImageProxy("Pamela Anderson");
 		ImageProxy img2 = new ImageProxy("Kim Kardashian");
@@ -103,6 +110,52 @@ public class SpLabMacoveiRaulApplication {
 		playboyS1.accept(new RenderContentVisitor());
 		endTime = System.currentTimeMillis();
 		System.out.println("Printing again the section 1 took " + (endTime - startTime) + " milliseconds");
+	}
+
+	private static void lab3StatisticsDemo() {
+		Section cap1 = new Section("Capitolul 1");
+		Paragraph p1 = new Paragraph("Paragraph 1");
+		cap1.add(p1);
+		Paragraph p2 = new Paragraph("Paragraph 2");
+		cap1.add(p2);
+		Paragraph p3 = new Paragraph("Paragraph 3");
+		cap1.add(p3);
+		Paragraph p4 = new Paragraph("Paragraph 4");
+		cap1.add(p4);
+		cap1.add(new ImageProxy("ImageOne"));
+		cap1.add(new Image("ImageTwo"));
+		cap1.add(new Paragraph("Some text"));
+		cap1.add(new Table("Table 1"));
+
+		BookStatistics stats = new BookStatistics();
+		cap1.accept(stats);
+		stats.printStatistics();
+	}
+
+	private static void lab3ToCDemo() {
+		Book carte = new Book("Design Patterns");
+		Section cap1 = new Section("Capitolul 1");
+		Section cap11 = new Section("Capitolul 1.1");
+		Section cap111 = new Section("Capitolul 1.1.1");
+		Section cap12 = new Section("Capitolul 1.2");
+		Section cap2 = new Section("Capitolul 2");
+		Section cap21 = new Section("Capitolul 2.1");
+
+		carte.addContent(new Paragraph("Prefata"));
+		carte.addContent(cap1);
+		carte.addContent(cap2);
+
+		cap1.add(new Paragraph("Introducere"));
+		cap1.add(cap11);
+		cap1.add(cap12);
+		cap11.add(cap111);
+		cap111.add(new Table("Tabel 1"));
+		cap12.add(new Paragraph("Text din 1.2"));
+		cap2.add(cap21);
+
+		GenerateToC generator = new GenerateToC();
+		carte.accept(generator);
+		generator.getToC().render();
 	}
 
 }
