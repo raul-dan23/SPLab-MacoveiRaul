@@ -3,7 +3,7 @@ package ro.uvt.info.SPLab_MacoveiRaul.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableOfContents implements Element {
+public class TableOfContents extends Element {
     private List<String> entries = new ArrayList<>();
 
     public TableOfContents() {
@@ -37,6 +37,11 @@ public class TableOfContents implements Element {
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException("TableOfContents is a leaf and cannot have children");
+    }
+
+    @Override
+    public String toString() {
+        return "TableOfContents";
     }
 
     @Override

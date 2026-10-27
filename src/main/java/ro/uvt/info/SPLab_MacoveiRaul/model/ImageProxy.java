@@ -1,6 +1,6 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
-public class ImageProxy implements Element {
+public class ImageProxy extends Element {
     private String url;
     private Image realImg = null;
 
@@ -34,6 +34,11 @@ public class ImageProxy implements Element {
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException("ImageProxy is a leaf and cannot have children");
+    }
+
+    @Override
+    public String toString() {
+        return "ImageProxy \"" + url + "\"";
     }
 
     @Override

@@ -1,6 +1,6 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
-public class Table implements Element {
+public class Table extends Element {
     private String title;
 
     public Table(String title) {
@@ -28,6 +28,11 @@ public class Table implements Element {
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException("Table is a leaf and cannot have children");
+    }
+
+    @Override
+    public String toString() {
+        return "Table \"" + title + "\"";
     }
 
     @Override
