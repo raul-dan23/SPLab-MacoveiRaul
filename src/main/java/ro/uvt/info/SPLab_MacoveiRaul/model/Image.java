@@ -2,7 +2,7 @@ package ro.uvt.info.SPLab_MacoveiRaul.model;
 
 import java.util.concurrent.TimeUnit;
 
-public class Image implements Element {
+public class Image extends Element {
     private String url;
 
     public Image(String url) {
@@ -36,6 +36,11 @@ public class Image implements Element {
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException("Image is a leaf and cannot have children");
+    }
+
+    @Override
+    public String toString() {
+        return "Image \"" + url + "\"";
     }
 
     @Override

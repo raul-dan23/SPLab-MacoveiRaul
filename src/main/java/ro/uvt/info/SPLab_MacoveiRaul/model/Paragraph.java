@@ -1,6 +1,6 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
-public class Paragraph implements Element {
+public class Paragraph extends Element {
     private String text;
     private AlignStrategy alignStrategy;
 
@@ -38,6 +38,12 @@ public class Paragraph implements Element {
     public Element get(int i) {
         throw new UnsupportedOperationException("Paragraph is a leaf and cannot have children");
     }
+
+    @Override
+    public String toString() {
+        return "Paragraph \"" + text + "\"";
+    }
+
     @Override
     public void accept(Visitor v) {
         v.visit(this);

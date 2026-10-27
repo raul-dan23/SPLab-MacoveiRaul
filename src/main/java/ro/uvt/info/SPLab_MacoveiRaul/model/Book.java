@@ -28,6 +28,11 @@ public class Book extends Section {
     }
 
     @Override
+    public String toString() {
+        return "Book \"" + title + "\"";
+    }
+
+    @Override
     public void accept(Visitor v) {
         v.visit(this);
         acceptChildren(v);

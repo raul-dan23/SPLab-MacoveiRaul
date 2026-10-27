@@ -24,6 +24,8 @@ public class SpLabMacoveiRaulApplication {
 
 		lab1CompositeDemo();
 		System.out.println();
+		lab1SharingDemo();
+		System.out.println();
 		lab2StrategyDemo();
 		System.out.println();
 		lab2ProxyDemo();
@@ -58,6 +60,29 @@ public class SpLabMacoveiRaulApplication {
 		cap1111.add(new Image("Image subchapter 1.1.1.1"));
 
 		noapteBuna.accept(new RenderContentVisitor());
+	}
+
+	private static void lab1SharingDemo() {
+		Section cap1 = new Section("Capitolul 1");
+		Section cap2 = new Section("Capitolul 2");
+		Paragraph p = new Paragraph("Paragraf unic");
+
+		cap1.add(p);
+		System.out.println("1. Added " + p + " to " + cap1 + " -> parent: " + p.getParent());
+
+		try {
+			cap2.add(p);
+		} catch (IllegalStateException e) {
+			System.out.println("2. Adding it to " + cap2 + " failed: " + e.getMessage());
+		}
+
+		cap1.remove(p);
+		System.out.println("3. Removed " + p + " from " + cap1 + " -> parent: " + p.getParent());
+		cap2.add(p);
+		System.out.println("   Added " + p + " to " + cap2 + " -> parent: " + p.getParent());
+
+		cap1.accept(new RenderContentVisitor());
+		cap2.accept(new RenderContentVisitor());
 	}
 
 	private static void lab2StrategyDemo() {

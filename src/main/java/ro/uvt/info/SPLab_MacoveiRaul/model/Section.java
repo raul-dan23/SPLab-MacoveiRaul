@@ -3,7 +3,7 @@ package ro.uvt.info.SPLab_MacoveiRaul.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Section implements Element {
+public class Section extends Element {
     protected String title;
     protected List<Element> children = new ArrayList<>();
 
@@ -33,12 +33,26 @@ public class Section implements Element {
 
     @Override
     public void add(Element e) {
+        // interzicem partajarea: un element poate apartine unei singure sectiuni
+        if (e.getParent() != null) {
+            throw new IllegalStateException(
+                    e + " already belongs to " + e.getParent() + "; remove it from there before adding it to " + this);
+        }
         children.add(e);
+        e.setParent(this);
     }
 
     @Override
     public void remove(Element e) {
-        children.remove(e);
+        // eliberam elementul doar daca era chiar copilul acestei sectiuni
+        if (children.remove(e)) {
+            e.setParent(null);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Section \"" + title + "\"";
     }
 
     @Override
