@@ -1,8 +1,17 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
+@Entity
 public class ImageProxy extends Element {
     private String url;
+    // cache runtime al imaginii incarcate lazy; nu se persista, se reconstruieste din url
+    @Transient
     private Image realImg = null;
+
+    protected ImageProxy() {
+    }
 
     public ImageProxy(String url) {
         // doar retine url-ul; Image-ul real se creeaza abia cand e ceruta imaginea propriu-zisa

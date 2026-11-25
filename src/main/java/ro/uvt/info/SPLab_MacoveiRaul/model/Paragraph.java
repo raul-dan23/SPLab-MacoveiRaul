@@ -1,8 +1,17 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
+@Entity
 public class Paragraph extends Element {
     private String text;
+    // strategie de randare (interfata, fara mapare JDBC) -> nepersistata
+    @Transient
     private AlignStrategy alignStrategy;
+
+    protected Paragraph() {
+    }
 
     public Paragraph(String text) {
         this.text = text;

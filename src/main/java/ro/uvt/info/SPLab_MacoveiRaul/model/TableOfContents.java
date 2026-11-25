@@ -1,8 +1,11 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
+import jakarta.persistence.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class TableOfContents extends Element {
     private List<String> entries = new ArrayList<>();
 
