@@ -1,11 +1,26 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
+import jakarta.persistence.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+
+@Entity
 public class Section extends Element {
     protected String title;
+    // partea "one": FK-ul sta in coloana parent_id a copilului (mappedBy), fara tabel de legatura
+    // @OrderBy: fara el, ordinea copiilor la reincarcare nu e garantata
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OrderBy("id ASC")
     protected List<Element> children = new ArrayList<>();
+
+    // constructor fara argumente, cerut de JPA
+    protected Section() {
+    }
 
     public Section(String title) {
         this.title = title;

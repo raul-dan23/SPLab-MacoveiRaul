@@ -1,9 +1,16 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
+import jakarta.persistence.Entity;
+
 import java.util.concurrent.TimeUnit;
 
+@Entity
 public class Image extends Element {
     private String url;
+
+    // fara sleep: Hibernate foloseste acest constructor la incarcarea din baza de date
+    protected Image() {
+    }
 
     public Image(String url) {
         this.url = url;

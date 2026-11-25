@@ -1,7 +1,15 @@
 package ro.uvt.info.SPLab_MacoveiRaul.model;
 
+import jakarta.persistence.Entity;
+
+// numele explicit: "table" e cuvant rezervat in SQL, iar JOINED creeaza un tabel per clasa
+@Entity
+@jakarta.persistence.Table(name = "table_element")
 public class Table extends Element {
     private String title;
+
+    protected Table() {
+    }
 
     public Table(String title) {
         this.title = title;
